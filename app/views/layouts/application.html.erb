@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Newapp</title>
+    <title><%=@page_title%></title>
+    <META name="keywords" content= "<%=@seo_keywords%>" />
+
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,6 +16,16 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+
+
+    <div>
+    <div><%= link_to "Home", root_path %></div>
+    <div><%= link_to "About", about_path %></div>
+    <div><%= link_to "Contact", contact_path %></div>
+    <div><%= link_to "Stories", stories_path %></div>
+    <div><%= link_to "Portfolios", portfolios_path %></div>
+    </div>
+
     <% if current_user.is_a?(User)%>
       <%= link_to "Logout", destroy_user_session_path, method: :delete %>
     <% else %>

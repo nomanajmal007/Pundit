@@ -4,10 +4,13 @@ class StoriesController < ApplicationController
   # GET /stories or /stories.json
   def index
     @stories = Story.all
+    @page_title="My Portfolio Story"
   end
 
   # GET /stories/1 or /stories/1.json
   def show
+    @page_title=@story.title
+    @seo_keywords=@story.body
   end
 
   # GET /stories/new
