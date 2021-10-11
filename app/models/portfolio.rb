@@ -23,5 +23,10 @@ include Placeholder
         self.thumg_image ||=Placeholder.image_generator(height:'350', width: '150')   
     end
 
+    resourcify
+    has_many :users, through: :roles, class_name: 'User', source: :users
+    has_many :creators, -> { where(roles: {name: :creator}) }, through: :roles, class_name: 'User', source: :users 
+    has_many :editors, -> { where(roles: {name: :editor}) }, through: :roles, class_name: 'User', source: :users 
+
 
 end

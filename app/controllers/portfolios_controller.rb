@@ -1,7 +1,8 @@
 class PortfoliosController < ApplicationController
 
   def index
-    @portfolio = Portfolio.all
+    @portfolio = policy_scope(Portfolio).all
+    authorize @portfolio
   end
 
   
@@ -25,6 +26,7 @@ class PortfoliosController < ApplicationController
 
       respond_to do |format|
         if @portfolio.save
+          current_user.add_role :creator, @portfolio
           format.html { redirect_to portfolios_path, notice: "Your Portfolio is Live Now." }
           format.json { render :show, status: :created, location: @portfolio }
         else
@@ -42,6 +44,7 @@ class PortfoliosController < ApplicationController
       @portfolio=Portfolio.find(params[:id])
       respond_to do |format|
         if @portfolio.update(portfolio_params)
+          current_user.add_role :editor, @portfolio
           format.html { redirect_to portfolios_path, notice: "Portfolio was successfully updated." }
           format.json { render :show, status: :ok, location: @portfolio }
         else

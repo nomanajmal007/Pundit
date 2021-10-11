@@ -1,0 +1,16 @@
+<br>
+<% @users.each do |user| %>
+    <%= user.email %>
+    <%= user.roles.pluck(:name) %>
+    <b>Current user can see user? </b>
+    <%= policy(User).index? %>
+    <b> Current user can edit user? </b>
+    <%= policy(User).edit? %>
+    <%= link_to 'Edit Roles', edit_user_path(user) if policy(User).edit?%>
+    <%= user.creator_portfolios.pluck(:id) %>
+    <%= user.editor_portfolios.pluck(:id) %>
+
+    <br>
+<% end %>
+
+     

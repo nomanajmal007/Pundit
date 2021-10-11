@@ -19,6 +19,11 @@
 
 
     <div>
+    <% if current_user.is_a?(User)%>
+      <div> "Admin" <%= current_user.has_role? :admin%></div>
+      <div> <%= current_user.roles.pluck(:name) %></div>
+    <% end %>
+     
     <div><%= link_to "Home", root_path %></div>
     <div><%= link_to "About", about_path %></div>
     <div><%= link_to "Contact", contact_path %></div>
